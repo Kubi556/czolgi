@@ -98,42 +98,16 @@ def narysujOknoGry():
     
 # niekończąca się pętla
 while True :
-    
-    # wypełnienie okna kolorem niebieskim
-    display_surface.fill(skyblue)
-
-    display_surface.blit(enemy_tank, (etank_pos_x, etank_pos_y))
-    display_surface.blit(textsurface, (40, 50))
-
-    display_surface.blit(tank, (tank_pos_x, tank_pos_y))
-    display_surface.blit(textsurface, (40, 50))
+    narysujOknoGry()
     # kopiowanie obiektu do płaszczyzny na pozycję
-
     #(tank_pos_x, tank_pos_y)
-    #display_surface.blit(tank, (tank_pos_x, tank_pos_y))
-    pygame.draw.rect(display_surface,green,[00,600,1200,100])
-
+    #mx, my = pygame.mouse.get_pos()
+    #move_ticker = 0
+    predkosc = 1
+    pressed = False
     # pętla przez zdarzenia (np naciśnięcie klawisza)
     for event in pygame.event.get() :
-        
         if event.type == pygame.KEYDOWN: #nasłuchiwanie klawiszy
-            
-            if event.key == pygame.K_SPACE: #jeśli spacja naciśnięta to:
-                print("BOOM!")
-                strzal.play()
-                while ball['pos']['y']>=380:
-                    F=ball['m']*g
-                    ball['v'][1]=ball['v'][1]-(F/ball['m'])*dt
-                    ball['pos']['x']=ball['pos']['x']+ball['v'][0]*dt/ball['m']
-                    ball['pos']['y']=ball['pos']['y']-ball['v'][1]*dt/ball['m']
-                    t=t+dt
-                    print(ball)
-                    display_surface.blit(pocisk, (ball['pos']['x'], ball['pos']['y']))
-                #pociski.append([losowa+10, 390])
-                print("Pociski =",pociski[0][0], pociski[0][1])
-                display_surface.blit(pocisk, (pociski[0][0], pociski[0][1]))
-                pygame.draw.rect(display_surface,rosso,[100,100,100,100])
-            
             if event.key == pygame.K_UP:
                 if nachylenie == 90:
                     print("Osiągnęto maksymalne nachylenie!")
@@ -149,7 +123,7 @@ while True :
                 nachylenie += 10
                 textsurface = myfont.render('Kąt nachylenia: {}'.format(nachylenie), True, (111,111, 111))    
             
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN: #reakcja na nacisniecie strzalki w dol
                 nachylenie += -1
                 textsurface = myfont.render('Kąt nachylenia: {}'.format(nachylenie), True, (111,111, 111))
             
